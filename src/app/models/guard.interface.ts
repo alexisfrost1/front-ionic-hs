@@ -1,3 +1,4 @@
+//modelo de la interfaz de guardia
 export interface Guard {
 
   id?: number;

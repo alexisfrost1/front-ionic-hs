@@ -1,3 +1,4 @@
+//modelo de la interfaz de visitas
 export interface Visitas {
 
     id?: string;

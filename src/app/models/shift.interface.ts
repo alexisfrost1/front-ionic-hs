@@ -1,3 +1,4 @@
+//modelo de la interfaz de los turnos
 export interface Shift {
     shiftId: string;
     type?: string;

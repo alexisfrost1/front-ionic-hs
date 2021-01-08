@@ -27,24 +27,24 @@ export class SecondPage implements OnInit {
     public toastController: ToastController,
     private router: Router
   ) {
+    /* Trae los datos del guardia */
     new Promise((resolve, reject) => {
       this.guard = this.auth.guardData()
-     /*  console.table(this.guard) */
       resolve()
     }).then(() => {
       this.shifts$ = this.api.getGuardShift(this.guard.id)
       this.api.getGuardShift(this.guard.id).toPromise()
         .then((data: any) => {
           this.shifts = data.shifts;
-         /*  console.table(this.shifts) */
         })
     })
-
+    /* instacia la variable conn lo registrado en el formulario */
     this.registerVisitorForm = this.createRegisterVisitorForm();
   }
 
   ngOnInit() {
   }
+  /* crea el formato del formulario a usar */
   createRegisterVisitorForm() {
     return this.formBuilder.group({
       name: new FormControl('', Validators.required),
@@ -55,6 +55,7 @@ export class SecondPage implements OnInit {
     })
   }
 
+/* Envia los datos del formulario a la api */
   registerVisitor() {
     this.api.registerVisitor(this.registerVisitorForm.value).toPromise().then(() => {
       console.log(this.registerVisitorForm.value)

@@ -1,3 +1,4 @@
+<!-- Pantalla de inicio -->
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
     <ion-title>
@@ -7,16 +8,16 @@
 </ion-header>
 
 <ion-content padding class="valign-wrapper2">
+  <!-- boton de finalizar turno -->
   <ion-fab size="large" vertical="bottom" horizontal="end" slot="fixed">
-    <!-- <ion-fab-button color="dark" (click)='finalShift()'> -->
       <ion-fab-button color="dark" (click)='presentAlert()'>
       <ion-icon name="log-out"></ion-icon>
       finish
     </ion-fab-button>
   </ion-fab>
 
+<!-- boton de iniciar turno -->
   <ion-fab size="large" vertical="bottom" horizontal="start" slot="fixed">
-  <!--   <ion-fab-button color="dark" (click)='initShift()'> -->
       <ion-fab-button color="dark" (click)='presentAlert2()'>
       <ion-icon name="stopwatch"></ion-icon>
       start
@@ -24,15 +25,17 @@
   </ion-fab>
   <br>
 
+  <!-- logo de la empresa -->
   <ion-item class="wrapper2">
     <ion-img src="\assets\imgs\logo.png"></ion-img>
   </ion-item>
   <br><br>
   
+  <!-- boton de rondas de la semana -->
   <ion-button size="large" expand="block" (click)="openModal()" color="medium">ver rondas de la semana</ion-button>
   <br><br>
   
-
+<!-- seleccionador de rondas para iniciar -->
   <ion-item color="medium">
     <ion-label>
       Elegir turno a iniciar:
@@ -48,6 +51,7 @@
   </ion-item>
   <br><br>
 
+  <!-- boton para desplegar ventana de regitrar incidente -->
   <ion-button (click)='notification()' shape="round" size="large" expand="block">Registrar nuevo Incidente</ion-button>
   <br><br>
 </ion-content>

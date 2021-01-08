@@ -24,17 +24,16 @@ export class RondasPage implements OnInit {
     private auth: AuthService,
     ) {}
 
+//trae los datos del guadia para saber los turnos registrados
   ngOnInit() {
     new Promise ((resolve, reject) => {
       this.guard = this.auth.guardData()
-    /*   console.table(this.guard) */
       resolve()
     }).then(() => {
       this.shifts$ = this.api.getGuardShift(this.guard.id)
       this.api.getGuardShift(this.guard.id).toPromise()
         .then((data: any) => {
           this.shifts = data.shifts;
-        /*   console.table(this.shifts) */
         })
     })
   }
@@ -44,7 +43,7 @@ export class RondasPage implements OnInit {
     await this.modalController.dismiss();
   }
 
-
+//metodo que abre la ubicacion de la ronda en maps
   openUrl (place: string){
     place = place.replace(/ /g, '+')
     this.browser.create('https://www.google.cl/maps/place/'+ place,'_self')

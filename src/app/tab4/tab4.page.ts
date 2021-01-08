@@ -34,16 +34,15 @@ export class Tab4Page {
     private router: Router
   ) {
 
+    /* se traen los datos del guardia y rondas */
     new Promise((resolve, reject) => {
       this.guard = this.auth.guardData()
-     /*  console.table(this.guard) */
       resolve()
     }).then(() => {
       this.shifts$ = this.api.getGuardShift(this.guard.id)
       this.api.getGuardShift(this.guard.id).toPromise()
         .then((data: any) => {
           this.shifts = data.shifts;
-         /*  console.table(this.shifts) */
         })
     })
 
@@ -51,6 +50,7 @@ export class Tab4Page {
     this.registerForm = this.createRegisterForm();
   }
 
+  /* formato del formulario */
   createRegisterForm() {
     return this.formBuilder.group({
       title: new FormControl('', Validators.required),
@@ -58,6 +58,8 @@ export class Tab4Page {
       shiftId: [this.guard.shiftId, Validators.required]
     })
   }
+
+  /* configuracion mensaje de alerta */
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,
@@ -67,12 +69,12 @@ export class Tab4Page {
     toast.present();
   }
 
-
+/* registrar los datos del formulario en el servicio de la api */
   register() {
     this.api.register(this.registerForm.value).toPromise().then(() => {
       this.router.navigate(['tabs/tab1'])
     }).catch(error => {
-      /* console.log(error.error.message) */
+      /* mensaje de error */
       let text: string
       switch (error.error.message) {
         case 'shift has been finished or unauthorized':
@@ -86,25 +88,6 @@ export class Tab4Page {
   }
 
   ngOninit() {
-    /* new Promise((resolve, reject) => {
-      this.guard = this.auth.guardData()
-      console.table(this.guard)
-      resolve()
-    }).then(() => {
-      this.shifts$ = this.api.getGuardShift(this.guard.id)
-      this.api.getGuardShift(this.guard.id).toPromise()
-        .then((data: any) => {
-          this.shifts = data.shifts;
-          console.table(this.shifts)
-        })
-    }) */
-
-    /* this.registerForm = this.createRegisterForm() */
-
-    /* this.registerForm = this.formBuilder.group({
-      incident: new FormControl('', Validators.required),
-      other: new FormControl('', Validators.required)
-    }); */
 
   }
 }

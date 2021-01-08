@@ -30,6 +30,7 @@ export class Tab2Page {
     private modalController: ModalController,
     private api: ApiService
   ) {
+    /* se traen los datos del guardia, rondas y visitas */
     new Promise((resolve, reject) => {
       this.guard = this.auth.guardData()
       resolve()
@@ -50,20 +51,21 @@ export class Tab2Page {
 
 
   }
+
+  /* refresh del listado de visitas con pull down */
   doRefresh( event ){
-    
-    
+
     setTimeout(()=>{
       this.visitas$ = this.api.getVisitors(this.guard.shiftId)
       this.api.getVisitors(this.guard.shiftId).toPromise()
         .then((data: any) => {
           this.visitas = data.visits;
-          /* console.table(this.visitas) */
         })
       event.target.complete();
     }, 1500);
 
   }
+  /* abrir modal second page para abrir formulario de registro de visitas */
   async openModal() {
     const modal = await this.modalController.create({
       component: SecondPage
@@ -71,12 +73,14 @@ export class Tab2Page {
     return await modal.present();
   }
 
+  /* guarda la id de la visita */
   saveVisitData(visitId: number){
-
     this.guard.visitId = visitId
     sessionStorage.setItem('guard',JSON.stringify(this.guard))
     console.table(this.guard)
   }
+
+  /* abrir modal para registrar la hora de salida de la visita */
   async openModal2() {
     const modal = await this.modalController.create({
       component: OutPage

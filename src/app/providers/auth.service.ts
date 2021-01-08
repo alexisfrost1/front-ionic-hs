@@ -22,16 +22,14 @@ export class AuthService {
   ) {
 
   }
+
+//llamada a la api para autenticar al usuario a traves de token y guardar sus datos en el item guard del sessionStorage
   login(userdata: Guard) {
     this.api.login(userdata.rut, userdata.password).toPromise()
       .then((res: any) => {
         if (res.success) {
-        /*   console.table(res.data) */
-          
           const token: string = res.data.accessToken;
-          
           const decoded = jwtDecode<JwtPayload>(token);
-         /*  console.log('algo text', decoded); */
           res.data['id'] = decoded.sub
           sessionStorage.setItem('guard', JSON.stringify(res.data))
           this.router.navigate(['/tabs/tab1'])
@@ -40,20 +38,19 @@ export class AuthService {
         }
       })
       .catch(error => {
-       /*  this.toast.show(error.message, '3000', 'center').toPromise()
-          .then(toast => {
-            console.log(toast)
-          }) */
-      console.error(error)    
+        console.error(error)
       })
   }
-  logout(){
+
+  //remover el item guard del sessionstorage
+  logout() {
     sessionStorage.removeItem('guard');
     this.ngZone.run(() => {
       this.navController.navigateRoot(['/login'])
     });
   }
 
+  //revisa si esta logeado viendo si existe o no el item guard en sessionStorage
   isLogged() {
     if (sessionStorage.getItem("guard") == null) {
       return false;
@@ -63,7 +60,7 @@ export class AuthService {
     }
   }
 
-  guardData(){
+  guardData() {
     return JSON.parse(sessionStorage.getItem('guard'))
   }
 

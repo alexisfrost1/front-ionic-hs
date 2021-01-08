@@ -31,6 +31,7 @@ export class Tab3Page {
     private router: Router,
     private auth: AuthService
   ) {
+    /* se traen datos del guardia y la ronda */
     new Promise((resolve, reject) => {
       this.guard = this.auth.guardData()
       resolve()
@@ -41,57 +42,41 @@ export class Tab3Page {
           this.shifts = data.shifts;
         })
     })
-
-    /* this.registerForm = this.createReportForm(); */
   }
 
 
-
+/* se guarda el boton de emergencia seleccionado en el servicio de la api de registrar reportes */
   reportes(data: string) {
    
     switch (data) {
       case 'Ambulance':
         this.api.report({ type: data, clientId: this.guard.client, shiftId: this.guard.shiftId }).toPromise()
           .then((data:any)=>{
-          /*   console.log(data) */
           })
         break;
       case 'Police':
         this.api.report({ type: data, clientId: this.guard.client, shiftId: this.guard.shiftId }).toPromise()
         .then((data:any)=>{
-          /* console.log(data) */
         })
         break;
       case 'Firefighter':
         this.api.report({ type: data, clientId: this.guard.client, shiftId: this.guard.shiftId }).toPromise()
         .then((data:any)=>{
-          /* console.log(data) */
         })
         break;
       case 'Office1':
         this.api.report({ type: data, clientId: this.guard.client, shiftId: this.guard.shiftId }).toPromise()
         .then((data:any)=>{
-          /* console.log(data) */
         })
         break;
       case 'Office2':
         this.api.report({ type: data, clientId: this.guard.client, shiftId: this.guard.shiftId }).toPromise()
         .then((data:any)=>{
-          /* console.log(data) */
         })
         break;
 
     }
 
   }
-
-
-  /* createReportForm() {
-    return this.formBuilder.group({
-      type: new FormControl('', Validators.required),
-      clientId: [this.guard.client, Validators.required],
-      shiftId: [this.guard.shiftId, Validators.required]
-    })
-  } */
 
 }

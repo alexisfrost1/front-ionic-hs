@@ -1,3 +1,5 @@
+ 
+ <!-- Ventana de login -->
  <ion-content class="valign-wrapper">
  	<br><br>
  	<br><br>
@@ -9,28 +11,9 @@
  			<br>
  			<ion-card-title>Login</ion-card-title>
 		 </ion-card-header>
-		 
-		 <!-- <ion-card-content padding text-center>
-			<img src="assets/imgs/servicorp-logo.png" class="logo" style="width: 80%; height: auto"/>
-			<form [formGroup]="loginForm" (ngSubmit)="login()">
-				<ion-list inset>
-					<ion-item>
-						<ion-label fixed>Usuario</ion-label>
-						<ion-input formControlName="rut" type="text" autofocus></ion-input>
-					</ion-item>
-					<ion-item>
-						<ion-label fixed>Contraseña</ion-label>
-						<ion-input formControlName="password" type="password"></ion-input>
-					</ion-item>
-				</ion-list>
-				<div padding>
-					<button ion-button block type="submit" [disabled]="!loginForm.valid">Entrar</button>
-				</div>
-			</form>
-			<ion-label>v1.1.0-beta</ion-label>
-		</ion-card-content> -->
-
+	
  		<ion-card-content>
+			 <!-- formulario de login -->
  			<form [formGroup]="loginForm" (ngSubmit)="login()">
  				<ion-grid>
  					<ion-row justify-content-center>
@@ -61,7 +44,6 @@
  				</ion-grid>
  			</form>
  		</ion-card-content>
-
  		<br>
  	</ion-card>
 

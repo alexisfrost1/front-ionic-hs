@@ -16,6 +16,8 @@ constructor(
 
     )
   } */
+
+  /* revisa si el guardia esta logeado sino lo envia a la ventana de login */
   canActivate() {
     if (!this.authservice.isLogged()) {
       this.router.navigate(['/login']);

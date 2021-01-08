@@ -26,6 +26,7 @@ export class OutPage implements OnInit {
     private auth: AuthService,
     public toastController: ToastController,
   ) { 
+    /* se traen los datos de las rondas del guardia y de las visitas */
     new Promise((resolve, reject) => {
       this.guard = this.auth.guardData()
       resolve()
@@ -53,26 +54,23 @@ export class OutPage implements OnInit {
 
 
   outVisit(){
-    /* var split1 = this.variableOut.split('T')[0] */
+    /* se trae la variable de hora en formato militar que se registra y se corta para dejar la hora en el formato deseado */
     var corteFecha = this.variableOut.split('T')[1]
     var corteExtra = corteFecha.split('.')[0]
-    /* var horaMinutoSegundo = JSON.stringify(corteExtra) */
+    
     var hora = corteExtra.split(':')[0]
     var minuto = corteExtra.split(':')[1]
     var horaMinuto = hora+ ':' + minuto
-    /* console.table(this.variableOut) */
-   /*  console.table(split1) */
-   /*  console.table(corteFecha)
-    console.table(horaMinutoSegundo)
-    console.table(horaMinuto) */
+   
+    //se envia la variable hora de salida a la api
     this.api.outVisit(this.guard.shiftId, this.guard.visitId, horaMinuto).toPromise()
-    /* this.api.outVisit(this.guard.shiftId, this.guard.visitId, JSON.stringify(split3)).toPromise() */
     .then((data: any) => {
     }).catch(error => {
       this.presentToast('Error al guardar hora de salida de visitante')
     })
   }
 
+  //configuracion del toast para mensages de error
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,

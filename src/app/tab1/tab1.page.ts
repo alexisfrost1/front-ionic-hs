@@ -34,16 +34,15 @@ export class Tab1Page implements OnInit {
     private alertCtrl: AlertController,
     private router: Router
   ) {
+    /* se traen los datos de las rondas */
     new Promise((resolve, reject) => {
       this.guard = this.auth.guardData()
-      /*  console.table(this.guard) */
       resolve()
     }).then(() => {
       this.shifts$ = this.api.getGuardShift(this.guard.id)
       this.api.getGuardShift(this.guard.id).toPromise()
         .then((data: any) => {
           this.shifts = data.shifts;
-          /*  console.table(this.shifts) */
         })
     })
 
@@ -81,51 +80,21 @@ export class Tab1Page implements OnInit {
     return await modal.present();
   }
 
+  /* se guardan los datos de id de ronda y id de cliente en la variable guard */
   saveId() {
-    /*  console.log(this.shiftId) */
-    
     this.guard.shiftId = parseInt(this.shiftId.split('$')[0])
     this.guard.client = parseInt(this.shiftId.split('$')[1])
-    /*  this.shift. = client.toString() */
+    
     sessionStorage.setItem('guard', JSON.stringify(this.guard))
-
-
-    /*   console.table(this.guard) */
   }
 
-  /* async initShift() {
-    this.api.initShift(this.guard.shiftId, this.guard.client, this.guard.id).toPromise()
-      .then((data: any) => {
-
-      }).catch(error => {
-        this.presentToast('La ronda ya se encuentra iniciada.')
-      }) */
-
-   /*  await this.localNotifications.schedule({
-      id: 10,
-      title: 'Recordatorio de ronda',
-      text: 'Recuerde registrar si ha ocurrido algún incidente',
-      data: { mysata: 'mensaje oculto de la notificacion' },
-         trigger: { in: 60, unit: ELocalNotificationTriggerUnit.MINUTE },
-      trigger: { in: 10, unit: ELocalNotificationTriggerUnit.SECOND },
-      foreground: true,
-
-    }) */
- /*  } */
-
-  /* finalShift() {
-    this.api.finalShift(this.guard.shiftId, this.guard.client, this.guard.id).toPromise()
-      .then((data: any) => {
-      }).catch(error => {
-        this.presentToast('La ronda ya se encuentra finalizada.')
-      })
-  } */
+ 
 
   openUrl() {
     this.browser.create('https://www.google.cl/maps/', '_self')
   }
 
-
+  /* datos del local notification */
   async notification() {
     /* await this.localNotifications.schedule({
       id: 10,
@@ -149,6 +118,7 @@ export class Tab1Page implements OnInit {
     }).then(alert => alert.present());
   }
 
+  /* alerta para terminar la ronda y llamada al servicio de la api para terminar la ronda */
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
@@ -177,6 +147,7 @@ export class Tab1Page implements OnInit {
     await alert.present();
   }
 
+   /* alerta para iniciar la ronda y llamada al servicio de la api para iniciar la ronda */
   async presentAlert2() {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',

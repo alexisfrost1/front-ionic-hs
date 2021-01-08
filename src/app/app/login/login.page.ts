@@ -15,14 +15,17 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
 
   ) { }
-
+/* instancia el formulario con la estructura de formulario de login */
   ngOnInit() {
     this.loginForm = this.createLoginForm()
   }
 
+  /* usa los datos del login para llamar al servicio de login de la api */
   login() {
     this.auth.login(this.loginForm.value)
   }
+
+  //formulario de login
   createLoginForm() {
     return this.formBuilder.group({
       rut: ['', Validators.required],
